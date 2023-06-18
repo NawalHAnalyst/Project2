@@ -10,8 +10,6 @@
  select SaleDateConverted, CONVERT(Date,SaleDate)
  from PortfolioProject.dbo.NashHousing
 
-
-
  UPDATE NashHousing
  SET SaleDate = CONVERT(Date,SaleDate)
 
@@ -21,8 +19,9 @@
  UPDATE NashHousing
  SET SaleDateConverted = CONVERT(Date,SaleDate)
 
- -- Populate Property Adsress Data
 
+
+ -- Populate Property Address Data
 
 
  select *
@@ -79,9 +78,6 @@ from PortfolioProject.dbo.NashHousing
 
 
 
-
-
-
  select OwnerAddress
  from PortfolioProject.dbo.NashHousing
 
@@ -105,7 +101,6 @@ ALTER TABLE NashHousing
  UPDATE NashHousing
  SET OwnerSplitCity = PARSENAME(REPLACE(OwnerAddress, ',', '.') , 2 )
 
-
  
   ALTER TABLE NashHousing
  ADD OwnerSplitState nvarchar(255);
@@ -116,6 +111,7 @@ ALTER TABLE NashHousing
 
 
  -- Change Y and N to Yes and No in Sold as Vacant
+
 
  select Distinct (SoldAsVacant), Count (SoldAsVacant)
  From PortfolioProject.dbo.NashHousing
@@ -138,8 +134,8 @@ ALTER TABLE NashHousing
  From PortfolioProject.dbo.NashHousing
 
 
-
  -- Remove Duplicates
+
 
  WITH RowNumCTE AS (
  Select *,
@@ -165,8 +161,6 @@ where row_num > 1
 
  Select *
  From PortfolioProject.dbo.NashHousing
-
-
 
 
 
