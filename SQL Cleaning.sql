@@ -1,9 +1,8 @@
  -- cleaning data in SQL Queries
 
-
  select *
  from PortfolioProject.dbo.NashHousing
-
+	 
 
  -- Standarize Date format
 
@@ -19,10 +18,8 @@
  UPDATE NashHousing
  SET SaleDateConverted = CONVERT(Date,SaleDate)
 
-
-
+	 
  -- Populate Property Address Data
-
 
  select *
  from PortfolioProject.dbo.NashHousing
@@ -47,7 +44,6 @@ where a.PropertyAddress is null
 
 --Breaking Address columns
 
-
  select PropertyAddress
  from PortfolioProject.dbo.NashHousing
 -- where PropertyAddress is null
@@ -58,13 +54,11 @@ SUBSTRING (PropertyAddress, 1, CHARINDEX(',', PropertyAddress)-1) as Address
 ,SUBSTRING (PropertyAddress, CHARINDEX(',', PropertyAddress)+1 , LEN(PropertyAddress)) as Address
 from PortfolioProject.dbo.NashHousing
 
-
  ALTER TABLE NashHousing
  ADD PropertySplitAddress nvarchar(255);
 
  UPDATE NashHousing
  SET PropertySplitAddress = SUBSTRING (PropertyAddress, 1, CHARINDEX(',', PropertyAddress)-1)
-
 
   ALTER TABLE NashHousing
  ADD PropertySplitCity nvarchar(255);
@@ -75,7 +69,6 @@ from PortfolioProject.dbo.NashHousing
 
  select *
  from PortfolioProject.dbo.NashHousing
-
 
 
  select OwnerAddress
@@ -112,7 +105,6 @@ ALTER TABLE NashHousing
 
  -- Change Y and N to Yes and No in Sold as Vacant
 
-
  select Distinct (SoldAsVacant), Count (SoldAsVacant)
  From PortfolioProject.dbo.NashHousing
  Group by SoldAsVacant
@@ -136,7 +128,6 @@ ALTER TABLE NashHousing
 
  -- Remove Duplicates
 
-
  WITH RowNumCTE AS (
  Select *,
  ROW_NUMBER () OVER (
@@ -158,10 +149,8 @@ where row_num > 1
 --Order by PropertyAddress
 
 
-
  Select *
  From PortfolioProject.dbo.NashHousing
-
 
 
  -- Delete Unused columns
